@@ -56,14 +56,20 @@ This project is a full-stack Todo App initiated as a learning exercise to transi
 - [ ] **Optimize and finalize the app**:
   - Planned: Improve performance and UI/UX before final deployment.
 
-## Current Status (Updated: June 07, 2025, 22:05 +07)
+## Current Status (Updated: June 15, 2025, Morning)
 - **Progress**:
-  - Backend development is progressing well. As of today, the developer has successfully:
+  - Backend development is progressing well. As of June 7, 2025, the developer had successfully:
     - Set up a Node.js environment with Yarn and installed required packages.
     - Written server code in `server.js` with defined API endpoints.
     - Implemented a MongoDB `Todo` model and established a working connection (confirmed at 04:26 PM HKT via terminal log).
     - Tested the API using Postman, receiving a 200 OK response with a sample message `"API is working"`.
     - Completed error handling and input validation for `POST /api/todos`, `PUT /api/todos/:id`, and `DELETE /api/todos/:id` (finished at 22:05 +07). Validation includes checks for empty text, invalid ObjectIds, and non-existent todos. Global error handler implemented for consistent error responses.
+  - Morning update (June 15, 2025):
+    - Refactored project structure to use TypeScript for better type safety and code organization
+    - Created dedicated directories for controllers, services, repositories, and models following clean architecture principles
+    - Implemented proper error handling middleware in Express application
+    - Set up TypeScript configuration and added nodemon for development workflow
+    - Successfully tested the restructured API endpoints to ensure functionality remained intact
   - The server is running locally at `http://localhost:3000`, monitored with `nodemon` for auto-restart.
 - **Challenges**:
   - Initially faced a MongoDB connection error (resolved by 04:26 PM HKT after adjusting configuration).
