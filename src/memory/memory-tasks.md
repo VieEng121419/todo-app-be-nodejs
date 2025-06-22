@@ -31,6 +31,11 @@ This project is a full-stack Todo App initiated as a learning exercise to transi
   - Set up server on port 3000, implemented basic routes, and tested with Postman (received 200 OK with message `"API is working"`).
 - [x] **Handle errors and add validation for API requests**:
   - Completed on June 07, 2025, 22:05 +07: Added input validation for `POST /api/todos` (ensures `text` is not empty), `PUT /api/todos/:id` (validates ObjectId and todo existence), and `DELETE /api/todos/:id` (validates ObjectId and todo existence). Implemented global error handler for 400, 404, and 500 responses. Tested with Postman for edge cases (empty text, invalid IDs, non-existent todos).
+- [x] **Implement Authentication System**:
+  - Completed on June 23, 2025: Built comprehensive authentication with JWT and refresh tokens
+  - Features: User registration/login, token refresh, secure logout, password hashing
+  - Architecture: Following Controller -> Service -> Repository pattern with TypeScript
+  - Security: Access tokens (15min), refresh tokens (7 days), token rotation, multiple device support
 - [ ] **Deploy backend to a platform**:
   - Planned: Deploy to Render or Vercel after completing all backend tasks.
 
@@ -56,7 +61,7 @@ This project is a full-stack Todo App initiated as a learning exercise to transi
 - [ ] **Optimize and finalize the app**:
   - Planned: Improve performance and UI/UX before final deployment.
 
-## Current Status (Updated: June 15, 2025, Morning)
+## Current Status (Updated: June 23, 2025)
 - **Progress**:
   - Backend development is progressing well. As of June 7, 2025, the developer had successfully:
     - Set up a Node.js environment with Yarn and installed required packages.
@@ -70,14 +75,39 @@ This project is a full-stack Todo App initiated as a learning exercise to transi
     - Implemented proper error handling middleware in Express application
     - Set up TypeScript configuration and added nodemon for development workflow
     - Successfully tested the restructured API endpoints to ensure functionality remained intact
+  - **Latest Update (June 23, 2025) - Authentication Feature Implementation**:
+    - Implemented comprehensive authentication system with JWT tokens and refresh token functionality
+    - Created `authModel.ts` with User schema including refresh token management and password hashing using bcrypt
+    - Built complete authentication flow following Controller -> Service -> Repository pattern:
+      - `authRepository.ts`: Database operations for user management and refresh token handling
+      - `authService.ts`: Business logic for login, registration, token generation and refresh
+      - `authController.ts`: HTTP request handling for auth endpoints
+    - Added robust refresh token system with token rotation for enhanced security
+    - Implemented authentication middleware for protecting routes
+    - Created comprehensive auth routes including login, register, refresh token, logout, and logout from all devices
+    - Configured environment variables for JWT secrets and token expiration times
+    - Fixed TypeScript type issues with Mongoose DocumentArray and JWT payload validation
+    - Authentication features include:
+      - User registration and login with email/password
+      - Access tokens (short-lived: 15 minutes) and refresh tokens (long-lived: 7 days)
+      - Automatic token rotation on refresh for security
+      - Multiple device support with individual token management
+      - Secure logout functionality (single device and all devices)
+      - Password hashing with bcrypt and proper validation
   - The server is running locally at `http://localhost:3000`, monitored with `nodemon` for auto-restart.
 - **Challenges**:
   - Initially faced a MongoDB connection error (resolved by 04:26 PM HKT after adjusting configuration).
   - No major issues reported during error handling implementation, but thorough Postman testing ensured edge cases were covered.
+  - **TypeScript Issues (June 23, 2025)**: Encountered type compatibility issues with Mongoose DocumentArray and JWT payload validation. Resolved by:
+    - Fixing Mongoose DocumentArray manipulation in auth model pre-save middleware
+    - Implementing proper JWT payload typing with custom interfaces and type guards
+    - Adding runtime validation for JWT token structure
 - **Next Steps**:
+  - **Integration**: Connect authentication system with todo endpoints to make todos user-specific
+  - **Testing**: Comprehensive testing of authentication flow with Postman including edge cases
   - Deploy the backend to a cloud platform (Render or Vercel) for persistence.
   - Begin front-end development with React to integrate with the working backend.
-  - Set up React project and plan UI components (e.g., TodoList, TodoItem, TodoForm).
+  - Set up React project and plan UI components (e.g., TodoList, TodoItem, TodoForm, LoginForm, RegisterForm).
 
 ## Development Notes
 - **Environment**: Developed on Windows (based on taskbar icons), using VS Code with Yarn as the package manager.
