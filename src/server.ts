@@ -1,6 +1,6 @@
 import express from "express";
 import database from "./config/db";
-import router from "./routes";
+import { todo, auth } from "./routes";
 import cors from "cors";
 import dotenv from "dotenv";
 
@@ -10,7 +10,8 @@ dotenv.config();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/todo", router);
+app.use("/api/todo", todo);
+app.use("/api/auth", auth); // Assuming you have auth routes set up
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Todo API");
